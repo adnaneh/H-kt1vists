@@ -28,4 +28,7 @@ class Server:
         self.availabe_core -= service.nb_proc
         self.availabe_ram -= service.volume_ram
         self.running_services.append(service)
+
+    def clone(self):
+        return Server([self.model, self.co2production, self.co2usage, self.disk, self.ram, self.cores])
     

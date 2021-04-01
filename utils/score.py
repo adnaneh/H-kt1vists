@@ -12,5 +12,5 @@ def calcule_score(scenario: Scenario, serveurs: Server):
 def produire_solution(serveurs: Server):
     res = ""
     for serv in serveurs:
-        res += serv.nom + "," + ",".join([service.nom for service in serv.running_services]) + "\n"
+        res += serv.model + "," + ",".join([service.nom for service in serv.running_services]) + "\n"
     return res
