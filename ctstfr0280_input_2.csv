@@ -1,0 +1,7 @@
+5
+backend,5,4,12
+frontend,5,20,6
+database,3000,10,2
+cicd,1000,16,4
+reporting,1000,4,2
+alerting,100,1,1
