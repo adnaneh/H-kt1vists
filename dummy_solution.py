@@ -27,7 +27,7 @@ def pick_valid_servers_server(service_array, services_catalog_params):
 @numba.jit(nopython=True)
 def pick_remaining_server(service_array, servers_remains, server_incs):
     for inc in server_incs:
-        server_type = serers_remains[inc]
+        server_type = servers_remains[inc]
         diff = (server_type - service_array >= 0).all()
         if diff:
             return(inc)
@@ -35,7 +35,7 @@ def pick_remaining_server(service_array, servers_remains, server_incs):
     return(-1)
 
 
-file_name = 'C:/Users/adnane/Downloads/ctstfr0280_input_5.csv'
+file_name = 'C:/Users/adnane/Downloads/ctstfr0280_input_6.csv'
 
 with open(file_name) as f:
     data = f.readlines() 
@@ -77,11 +77,13 @@ for service_line in data:
     service_line_split = service_line.split(',')[1:]
     service_line_split = [int(x) for x in service_line_split]
     
-    server = pick_remaining_server(np.array(service_line_split), server_remains)
-    if server == -1: 
+    if server_incs != []:
+        server = pick_remaining_server(np.array(service_line_split), server_remains, np.array(server_incs))
+    if server_incs == [] or server == -1: 
         server = pick_smallest_server(np.array(service_line_split), services_catalog_params)
         servers_types[inc] = server
         server_remains[inc] = services_catalog_params[server]
+        server_remains[inc] -= np.array(service_line_split)
         service_line_split.append(inc)
         server_incs.append(inc)
 
@@ -106,8 +108,8 @@ server_services_map = {}
 server_names_map = {}
 for service in services_params:
     server_id  = int(service[-1])
-    server = servers_types[server_id]
-    server_name = sorted_models[server]
+    server = int(servers_types[server_id])
+    server_name = sorted_models.iloc[server]
     
     if server_id in server_names_map:
         server_services_map[server_id].append(inc)
@@ -126,6 +128,10 @@ for server_id in server_services_map:
 # print(result)
 
 pd.DataFrame(result).to_csv('exemple.csv', index = False, header = False)
+
+with open('ex.csv', 'w') as f:
+    for item in result:
+        f.write(','.join(item) + '\n')
 
 if False:
     # Tests
