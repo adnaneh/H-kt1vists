@@ -6,3 +6,6 @@ class Server:
         self.disk = int(line[3])
         self.ram = int(line[4])
         self.cores = int(line[5])
+
+    def impact_co2(self, nb_annee=0):
+        return self.co2production + self.co2usage * nb_annee
