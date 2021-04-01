@@ -25,9 +25,9 @@ def pick_valid_servers_server(service_array, services_catalog_params):
     return(res)
 
 @numba.jit(nopython=True)
-def pick_remaining_server(service_array, servers_remains):
-    inc = 0
-    for server_type in servers_remains:
+def pick_remaining_server(service_array, servers_remains, server_incs):
+    for inc in server_incs:
+        server_type = serers_remains[inc]
         diff = (server_type - service_array >= 0).all()
         if diff:
             return(inc)
@@ -58,6 +58,7 @@ param_columns = ['disk', 'ram', 'cores']
 # initialisation
 initial_line = True
 inc = 0
+server_incs = []
 for service_line in data:
     if initial_line:
         n_years = int(service_line)
@@ -82,6 +83,7 @@ for service_line in data:
         servers_types[inc] = server
         server_remains[inc] = services_catalog_params[server]
         service_line_split.append(inc)
+        server_incs.append(inc)
 
     else:  
         server_remains[server] -= np.array(service_line_split)
