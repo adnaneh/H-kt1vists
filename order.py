@@ -4,7 +4,7 @@ from utils.scenario import Scenario
 from utils.score import *
 from tqdm import tqdm
 
-input_number = "6"
+input_number = "3"
 
 server_catalog = "codecontest_fr_df_accenturehackathome/servers_catalog.csv"
 scenario_file = "ctstfr0280_input_" + input_number + ".csv"
@@ -46,8 +46,9 @@ while len(scenario.services) > 0:
                 servers.append(new_s)
                 break
 
-print("Score: ", calcule_score(scenario, servers))
+
 solution = produire_solution(servers)
 print("Solution: \n" + solution)
+print("Score: ", calcule_score(scenario, servers))
 
 res_to_file("input_" + input_number + ".csv", solution)

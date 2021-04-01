@@ -32,7 +32,7 @@ catalog = sorted(catalog, key=lambda server: server.impact_co2(scenario.nb_annee
 servers = []
 while len(scenario.services) > 0:
     # on trie les serveurs par place restante
-    servers = sorted(servers, reverse=True)
+    servers = sorted(servers, reverse=False)
 
     # on prend le plus gros service
     biggest = max(scenario.services)
