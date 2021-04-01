@@ -1,3 +1,1 @@
-classic2,backend,cicd
-memory2,frontend,alerting
-classic6,database,reporting
+large1,backend,frontend,cicd,database,reporting,alerting

@@ -32,3 +32,23 @@ class Server:
     def clone(self):
         return Server([self.model, self.co2production, self.co2usage, self.disk, self.ram, self.cores])
     
+    def __ge__(self, other):
+        if self.availabe_core >= other.availabe_core:
+            return True
+        if self.availabe_ram >= other.availabe_ram:
+            return True
+        if self.availabe_disk >= other.availabe_disk:
+            return True
+        return False
+
+    def __gt__(self, other):
+        if self.availabe_core > other.availabe_core:
+            return True
+        elif self.availabe_core == other.availabe_core:
+            if self.availabe_ram > other.availabe_ram:
+                return True
+            elif self.availabe_ram == other.availabe_ram:
+                if self.availabe_disk > other.availabe_disk:
+                    return True
+
+        return False

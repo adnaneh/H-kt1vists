@@ -25,3 +25,14 @@ class Service:
                     return True
 
         return False
+
+    def __add__(self, other):
+        return Service([
+            "",
+            self.volume_stockage + other.volume_stockage,
+            self.volume_ram + other.volume_ram,
+            self.nb_proc + other.nb_proc
+            ])
+
+    def __repr__(self):
+        return f"Service: CPU: {self.nb_proc}, RAM: {self.volume_ram}, Disk: {self.volume_stockage}"
