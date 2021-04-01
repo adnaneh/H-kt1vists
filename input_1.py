@@ -2,9 +2,12 @@ import csv
 from utils.servers import Server
 from utils.scenario import Scenario
 from utils.score import *
+from tqdm import tqdm
+
+input_number = "6"
 
 server_catalog = "codecontest_fr_df_accenturehackathome/servers_catalog.csv"
-scenario_file = "ctstfr0280_input_1.csv"
+scenario_file = "ctstfr0280_input_" + input_number + ".csv"
 
 catalog = []
 scenario = None
@@ -25,7 +28,8 @@ with open(scenario_file, "r") as scenario_file:
 catalog = sorted(catalog, key=lambda server: server.impact_co2(scenario.nb_annees))
 
 servers = []
-for service in scenario.services:
+for i in tqdm(range(len(scenario.services))):
+    service = scenario.services[i]
     # si on a aucun serveur
     if len(servers) == 0:
         for serv in catalog:
@@ -56,4 +60,4 @@ print("Score: ", calcule_score(scenario, servers))
 solution = produire_solution(servers)
 print("Solution: \n" + solution)
 
-res_to_file("input_1.csv", solution)
+res_to_file("input_" + input_number + ".csv", solution)
