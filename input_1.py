@@ -53,4 +53,7 @@ for service in scenario.services:
                     break
 
 print("Score: ", calcule_score(scenario, servers))
-print("Solution: \n" + produire_solution(servers))
+solution = produire_solution(servers)
+print("Solution: \n" + solution)
+
+res_to_file("input_1.csv", solution)
