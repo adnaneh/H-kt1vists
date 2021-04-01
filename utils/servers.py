@@ -18,7 +18,6 @@ class Server:
     def impact_co2(self, nb_annee=0):
         return self.co2production + self.co2usage * nb_annee
 
-
     def can_add_service(self, service: Service):
         if service.nb_proc > self.availabe_core or service.volume_ram > self.availabe_ram or service.volume_stockage > self.availabe_disk:
             return False
